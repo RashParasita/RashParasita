@@ -1,31 +1,31 @@
 name: Generate GitHub Contribution Animation
 
 on:
-  # Executa automaticamente a cada 24 horas
+  # Executa automaticamente todos os dias à meia-noite UTC
   schedule:
-    - cron: "0 0 * * *"  # Agendado para meia-noite UTC todos os dias
+    - cron: "0 0 * * *"
 
-  # Permite executar o job manualmente a qualquer momento
+  # Permite execução manual via GitHub Actions
   workflow_dispatch:
 
-  # Executa em cada push para a branch principal
+  # Executa quando houver push na branch 'main'
   push:
     branches:
-      - main  # Alterado para 'main', que é o padrão atual do GitHub
+      - main
 
 jobs:
   generate:
+    runs-on: ubuntu-latest
     permissions:
       contents: write
-    runs-on: ubuntu-latest
     timeout-minutes: 5
 
     steps:
-      # Verifica o código do repositório
+      # Clona o repositório para o ambiente de execução
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Gera a animação do gráfico de contribuições do GitHub
+      # Gera a animação do gráfico de contribuições
       - name: Generate GitHub Contribution Snake Animation
         uses: Platane/snk/svg-only@v3
         with:
@@ -34,16 +34,18 @@ jobs:
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
-      # Verifica se os arquivos SVG foram gerados com sucesso
+      # Verifica a geração correta dos arquivos SVG
       - name: Verify SVG files
         run: |
-          if [ ! -f dist/github-contribution-grid-snake.svg ] || [ ! -f dist/github-contribution-grid-snake-dark.svg ]; then
-            echo "Erro: Arquivos SVG não foram gerados corretamente."
-            exit 1
-          fi
+          for file in dist/github-contribution-grid-snake.svg dist/github-contribution-grid-snake-dark.svg; do
+            if [ ! -f "$file" ]; then
+              echo "Erro: $file não foi gerado corretamente."
+              exit 1
+            fi
+          done
 
       # Publica os arquivos SVG na branch 'output'
-      - name: Push SVG files to output branch
+      - name: Deploy SVG files to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
           target_branch: output
@@ -51,12 +53,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Notifica em caso de sucesso ou falha
+      # Notifica o status da execução do workflow
       - name: Notify workflow status
         if: always()
         run: |
-          if [ "${{ job.status }}" == "success" ]; then
-            echo "Workflow executado com sucesso!"
-          else
-            echo "Workflow falhou. Verifique os logs para mais detalhes."
-          fi
+          case "${{ job.status }}" in
+            success) echo "🎉 Workflow executado com sucesso!";;
+            failure) echo "❌ Workflow falhou. Verifique os logs para mais detalhes.";;
+            *) echo "⚠️ Status do workflow: ${{ job.status }}";;
+          esac
