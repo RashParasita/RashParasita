@@ -142,13 +142,13 @@ Não estava focando tanto no meu GitHub, mas este ano prometo trazer algumas coi
 
   <img 
     alt="GitHub Stats" 
-    height="200" 
+    height="180" 
     src="https://github-readme-stats.vercel.app/api?username=R4SHz&show_icons=true&theme=transparent&include_all_commits=true&locale=pt-br" 
   />
   
   <img 
     alt="GitHub Top Langs" 
-    height="200" 
+    height="180" 
     src="https://github-readme-stats.vercel.app/api/top-langs/?username=R4SHz&theme=transparent&layout=compact&custom_title=Tecnologias&langs_count=9" 
   />
 </div>
