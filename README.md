@@ -135,6 +135,7 @@ Não estava focando tanto no meu GitHub, mas este ano prometo trazer algumas coi
 </picture>
 
 <br>
+<br>
 
 
 <div style="display: flex; align-items: center; gap: 10px;">
