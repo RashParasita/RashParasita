@@ -131,22 +131,23 @@ Não estava focando tanto no meu GitHub, mas este ano prometo trazer algumas coi
   <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/RashParasita/RashParasita/output/github-contribution-grid-snake-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/RashParasita/RashParasita/output/github-contribution-grid-snake-dark.svg">
   <img align="center" alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/RashParasita/RashParasita/output/github-contribution-grid-snake.svg">
+
 </picture>
 
-<p>
+<br>
+
+
+<div style="display: flex; align-items: center; gap: 10px;">
+
   <img 
-    align="left" 
     alt="GitHub Stats" 
     height="200" 
-    style="padding-right: 10px;" 
     src="https://github-readme-stats.vercel.app/api?username=R4SHz&show_icons=true&theme=transparent&include_all_commits=true&locale=pt-br" 
   />
-
-<img 
-      align="left" 
-      alt="GitHub Stats" 
-      height="200" 
-      src="https://github-readme-stats.vercel.app/api/top-langs/?username=R4SHz&theme=transparent&layout=compact&custom_title=Tecnologias&langs_count=9" 
+  
+  <img 
+    alt="GitHub Top Langs" 
+    height="200" 
+    src="https://github-readme-stats.vercel.app/api/top-langs/?username=R4SHz&theme=transparent&layout=compact&custom_title=Tecnologias&langs_count=9" 
   />
-
-</p>
+</div>
