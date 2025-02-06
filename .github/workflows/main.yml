@@ -1,14 +1,14 @@
 name: Generate GitHub Contribution Animation
 
 on:
-  # Executa automaticamente todos os dias à meia-noite UTC
+  
   schedule:
     - cron: "0 0 * * *"
 
-  # Permite execução manual via GitHub Actions
+  
   workflow_dispatch:
 
-  # Executa quando houver push na branch 'main'
+  
   push:
     branches:
       - main
@@ -21,11 +21,11 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      # Clona o repositório para o ambiente de execução
+      
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # Gera a animação do gráfico de contribuições
+     
       - name: Generate GitHub Contribution Snake Animation
         uses: Platane/snk/svg-only@v3
         with:
@@ -34,7 +34,7 @@ jobs:
             dist/github-contribution-grid-snake.svg
             dist/github-contribution-grid-snake-dark.svg?palette=github-dark
 
-      # Verifica a geração correta dos arquivos SVG
+  
       - name: Verify SVG files
         run: |
           for file in dist/github-contribution-grid-snake.svg dist/github-contribution-grid-snake-dark.svg; do
@@ -44,7 +44,6 @@ jobs:
             fi
           done
 
-      # Publica os arquivos SVG na branch 'output'
       - name: Deploy SVG files to output branch
         uses: crazy-max/ghaction-github-pages@v3.1.0
         with:
@@ -53,12 +52,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Notifica o status da execução do workflow
+  
       - name: Notify workflow status
         if: always()
         run: |
           case "${{ job.status }}" in
             success) echo "🎉 Workflow executado com sucesso!";;
-            failure) echo "❌ Workflow falhou. Verifique os logs para mais detalhes.";;
+            failure) echo "❌ Workflow falhou.";;
             *) echo "⚠️ Status do workflow: ${{ job.status }}";;
           esac
